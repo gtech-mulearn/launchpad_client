@@ -4,9 +4,7 @@ import "./Leader.css";
 function Leader() {
   return (
     <div className="leade_container">
-      <div className="leader">
-        <img className="logo" src={logo} alt="logo" />
-      </div>
+      <div className="leader"></div>
     </div>
   );
 }
