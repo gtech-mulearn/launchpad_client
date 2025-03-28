@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: 100%;
+  padding: 10px;
+}
+
+.home_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #f5700e;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  background-color: #f9f4f0;
+  background-image: linear-gradient(#fff 1px, transparent 1px),
+    linear-gradient(90deg, #fff 1px, transparent 1px);
+  background-size: 20px 20px;
+  padding: 20px;
+}
+
+.logo {
+  width: 80%;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.cluster {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.cluster_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cluster_tab {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  transition: transform 0.2s;
+  filter: drop-shadow(0px 5px 10px rgba(245, 112, 14, 0.1));
+}
+
+.cluster_tab:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+/* Desktop layout - 2x2 grid */
+@media (min-width: 769px) {
+  .home_container {
+    padding: 40px;
+    min-height: 90vh;
+  }
+
+  .cluster {
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    gap: 30px;
+  }
+
+  .cluster_container {
+    width: calc(50% - 15px);
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile layout - vertical column with no scrolling */
+@media (max-width: 768px) {
+  .home {
+    padding: 10px;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .home_container {
+    height: 100%;
+    padding: 10px 15px 20px;
+    overflow: hidden;
+  }
+
+  .logo {
+    width: 75%;
+    max-width: 280px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .cluster {
+    flex-direction: column;
+    gap: 15px;
+    height: calc(100% - 80px);
+    justify-content: space-between;
+  }
+
+  .cluster_container {
+    flex-direction: column;
+    margin-bottom: 0;
+    height: 20%;
+  }
+
+  .cluster_tab {
+    width: 95%;
+    object-fit: contain;
+    margin-bottom: 0;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+  .home_container {
+    padding: 8px 10px 15px;
+  }
+
+  .logo {
+    margin-bottom: 15px;
+    width: 70%;
+  }
+
+  .cluster {
+    gap: 10px;
+  }
+}
