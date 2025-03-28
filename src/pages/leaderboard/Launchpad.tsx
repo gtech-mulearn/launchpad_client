@@ -36,7 +36,7 @@ function Leaderboard() {
   const [searchTearm, setsearchTearm] = useState("");
   useEffect(() => {
     getTableData({ perPage: 15 }).then((data) => {
-      settableData(data.data.slice(3));
+      settableData(data.data);
       setpaginationData(data.pagination);
       settopThree(data.data.slice(0, 3));
     });
@@ -81,22 +81,7 @@ function Leaderboard() {
             Search
           </button>
         </div>
-        <div className={style.cardsContainer}>
-          {topThree.map((user, index) => (
-            <Card
-              img={user.profile_pic}
-              key={index}
-              full_name={user.full_name}
-              email={user.muid}
-              karma={user.karma}
-              rank={index + 1}
-              org={user.org}
-              district_name={user.district_name}
-              muid={user.muid}
-              is_public={user.is_public}
-            />
-          ))}
-        </div>
+  
         <div className={style.fullWidth}>
           {tableData ? <Table data={tableData} /> : <h1>Loading...</h1>}
         </div>
