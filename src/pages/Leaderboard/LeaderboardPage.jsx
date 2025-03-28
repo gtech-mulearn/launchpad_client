@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
-import logo from "../../assets/launchpad_logo.svg";
+import Spinner from "../components/Spinner";
 
 function LeaderboardPage() {
+  // Existing state variables
   const { cluster } = useParams();
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,12 @@ function LeaderboardPage() {
     phone: "",
     message: "",
   });
+  const [searchQuery, setSearchQuery] = useState("");
 
+  // New state for thanks modal
+  const [showThanksModal, setShowThanksModal] = useState(false);
+
+  // Other existing functions and useEffect...
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       setLoading(true);
@@ -89,6 +94,7 @@ function LeaderboardPage() {
     });
   };
 
+  // Updated submit handler to show thanks modal instead of alert
   const handleSubmitHire = (e) => {
     e.preventDefault();
     // Here you would typically send this data to your backend
@@ -97,11 +103,33 @@ function LeaderboardPage() {
       ...hireFormData,
     });
 
-    // Show success message or handle the response
-    alert(
-      `Your hiring request for ${selectedUser.full_name} has been submitted!`
-    );
-    handleCloseModal();
+    // Close hire modal and show thanks modal
+    setShowHireModal(false);
+    setShowThanksModal(true);
+
+    // Automatically close thanks modal after 5 seconds
+    setTimeout(() => {
+      setShowThanksModal(false);
+      setSelectedUser(null);
+      setHireFormData({
+        companyName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    }, 5000);
+  };
+
+  // Function to close thanks modal
+  const handleCloseThanksModal = () => {
+    setShowThanksModal(false);
+    setSelectedUser(null);
+    setHireFormData({
+      companyName: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
   };
 
   // Function to get the cluster display name
@@ -120,92 +148,187 @@ function LeaderboardPage() {
     }
   };
 
+  // Function to render profile picture or fallback icon
+  const renderProfilePicture = (user) => {
+    if (user.profile_pic) {
+      return (
+        <img
+          src={user.profile_pic}
+          alt={`${user.full_name}'s profile`}
+          className="profile-picture"
+        />
+      );
+    } else {
+      // Person circle icon as SVG
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="profile-icon"
+        >
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
+          <path d="M12 15a5 5 0 0 1-5-5c0-2.76 2.24-5 5-5s5 2.24 5 5a5 5 0 0 1-5 5z"></path>
+          <path d="M18.13 17.83A9.36 9.36 0 0 1 12 20c-2.24 0-4.26-.84-5.85-2.19"></path>
+        </svg>
+      );
+    }
+  };
+
   return (
     <div className="leaderboard">
       <div className="leaderboard-container">
-        <div className="leaderboard-header">
-          <Link to="/">
-            <img className="logo" src={logo} alt="LaunchPad Kerala logo" />
-          </Link>
-          <h1 className="cluster-title">
-            {getClusterDisplayName()} Leaderboard
-          </h1>
-        </div>
-
         {loading ? (
-          <div className="loading">Loading leaderboard data...</div>
+          <Spinner />
         ) : error ? (
           <div className="error">Error: {error}</div>
         ) : (
           <>
+            <h1 className="cluster-title">{getClusterDisplayName()}</h1>
+
+            <div className="table-controls">
+              <div className="search-container">
+                <input
+                  type="text"
+                  placeholder="Search by name..."
+                  className="search-input"
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button className="search-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="search-icon"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="pagination">
+                <button
+                  className="arrow-button"
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="arrow-icon"
+                  >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <span className="page-info">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  className="arrow-button"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="arrow-icon"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
             <div className="table-container">
               <table className="leaderboard-table">
                 <thead>
                   <tr>
                     <th>Rank</th>
                     <th>Name</th>
-                    <th>MUID</th>
-                    <th>Category Karma</th>
                     <th>Total Karma</th>
                     <th>Interest Groups</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {leaderboardData.map((user, index) => (
-                    <tr
-                      key={user.muid}
-                      className={index < 3 ? `top-${index + 1}` : ""}
-                    >
-                      <td>{(currentPage - 1) * 10 + index + 1}</td>
-                      <td>{user.full_name}</td>
-                      <td>{user.muid}</td>
-                      <td>{user.category_karma.toLocaleString()}</td>
-                      <td>{user.total_karma.toLocaleString()}</td>
-                      <td>
-                        <div className="interest-groups">
-                          {user.ig_data.map((ig) => (
-                            <div key={ig.ig_id} className="interest-group">
-                              <span className="ig-name">{ig.ig_name}</span>
-                              <span className="ig-karma">
-                                {ig.ig_karma.toLocaleString()}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </td>
-                      <td>
-                        <button
-                          className="hire-button"
-                          onClick={() => handleHireClick(user)}
-                        >
-                          Hire Me
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {leaderboardData
+                    .filter((user) =>
+                      user.full_name
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                    )
+                    .map((user, index) => (
+                      <tr
+                        key={user.muid}
+                        className={index < 3 ? `top-${index + 1}` : ""}
+                      >
+                        <td>{(currentPage - 1) * 10 + index + 1}</td>
+
+                        <td>{user.full_name}</td>
+                        <td>
+                          {user.total_karma > 1000
+                            ? `${(user.total_karma / 1000).toFixed(1)}K `
+                            : user.total_karma}
+                          <span
+                            className={
+                              "font-sans font-bold text-xl pl-1 -translate-y-1 text-[#1B1A1E]"
+                            }
+                          >
+                            ϰ
+                          </span>
+                        </td>
+                        <td>
+                          <div className="interest-groups">
+                            {user.ig_data.map((ig) => (
+                              <div key={ig.ig_id} className="interest-group">
+                                <span className="ig-name">{ig.ig_name}</span>
+                                <span className="ig-karma">
+                                  {ig.ig_karma > 1000
+                                    ? `${(ig.ig_karma / 1000).toFixed(1)}K `
+                                    : ig.ig_karma}
+                                  <span
+                                    className={
+                                      "font-sans font-bold text-xl pl-1 -translate-y-1 text-[#1B1A1E]"
+                                    }
+                                  >
+                                    ϰ
+                                  </span>
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                        <td>
+                          <button
+                            className="hire-button"
+                            onClick={() => handleHireClick(user)}
+                          >
+                            Hire Me
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
-            </div>
-
-            <div className="pagination">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                className="pagination-button"
-              >
-                Previous
-              </button>
-              <span className="page-info">
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                className="pagination-button"
-              >
-                Next
-              </button>
             </div>
           </>
         )}
@@ -216,7 +339,10 @@ function LeaderboardPage() {
         <div className="modal-overlay">
           <div className="modal-container">
             <div className="modal-header">
-              <h2>Hire {selectedUser.full_name}</h2>
+              <h2>
+                <span className="text-black">Hire</span>{" "}
+                {selectedUser.full_name}
+              </h2>
               <button className="modal-close" onClick={handleCloseModal}>
                 ×
               </button>
@@ -280,6 +406,66 @@ function LeaderboardPage() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Thanks Modal for Employers */}
+      {showThanksModal && selectedUser && (
+        <div className="modal-overlay">
+          <div className="modal-container thanks-modal">
+            <div className="modal-header">
+              <h2>Thank You!</h2>
+              <button className="modal-close" onClick={handleCloseThanksModal}>
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="thanks-content">
+                <div className="thanks-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4caf50"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="thanks-check-icon"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <h3 className="thanks-title">Request Received!</h3>
+                <p className="thanks-message">
+                  Thank you for your interest in recruiting talent from
+                  Launchpad, {hireFormData.companyName}!
+                </p>
+                <p className="thanks-details">
+                  We've received your request to connect with{" "}
+                  {selectedUser.full_name}. Our team will review your
+                  application and reach out to coordinate next steps.
+                </p>
+                <p className="thanks-employer">
+                  As an employer, you're making a valuable contribution to our
+                  community's growth. We prioritize employer requests and will
+                  process yours promptly.
+                </p>
+                <div className="thanks-footer">
+                  <p className="contact-info">
+                    For urgent inquiries, please contact our recruitment team
+                    directly.
+                  </p>
+                </div>
+                <button
+                  className="close-thanks-button"
+                  onClick={handleCloseThanksModal}
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>

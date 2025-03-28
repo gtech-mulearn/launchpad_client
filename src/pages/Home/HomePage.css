@@ -11,7 +11,10 @@
   align-items: center;
   min-height: 100vh;
   height: 100%;
-  padding: 10px;
+  background-color: #f9f4f0;
+  background-image: linear-gradient(#fff 1px, transparent 1px),
+    linear-gradient(90deg, #fff 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .home_container {
@@ -19,22 +22,17 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #f5700e;
   border-radius: 24px;
   width: 100%;
   max-width: 1200px;
   height: 100%;
-  background-color: #f9f4f0;
-  background-image: linear-gradient(#fff 1px, transparent 1px),
-    linear-gradient(90deg, #fff 1px, transparent 1px);
-  background-size: 20px 20px;
   padding: 20px;
 }
 
 .logo {
   width: 80%;
   max-width: 500px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .cluster {
@@ -92,54 +90,63 @@
   .home {
     padding: 10px;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto; /* Changed from hidden to allow scrolling if needed */
   }
 
   .home_container {
     height: 100%;
-    padding: 10px 15px 20px;
-    overflow: hidden;
+    padding: 20px 15px;
+    overflow: visible; /* Changed from hidden to allow all content to be visible */
   }
 
   .logo {
-    width: 75%;
-    max-width: 280px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    width: 90%; /* Increased from 70% */
+    max-width: 380px;
+    margin-top: 20px; /* Increased from 10px */
+    margin-bottom: 30px; /* Increased from 20px */
+    min-width: 280px; /* Ensure minimum size on small screens */
   }
 
   .cluster {
     flex-direction: column;
-    gap: 15px;
-    height: calc(100% - 80px);
-    justify-content: space-between;
+    gap: 20px; /* Increased from 15px */
+    justify-content: center; /* Changed from space-between */
+    align-items: center;
   }
 
   .cluster_container {
     flex-direction: column;
     margin-bottom: 0;
-    height: 20%;
+    height: auto; /* Changed from 20% to auto */
+    max-width: 95%;
   }
 
   .cluster_tab {
-    width: 95%;
+    width: 100%;
     object-fit: contain;
-    margin-bottom: 0;
+    margin-bottom: 5px;
+  }
+
+  .tab_link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
 
 /* Extra small devices */
 @media (max-width: 375px) {
   .home_container {
-    padding: 8px 10px 15px;
+    padding: 15px 10px;
   }
 
   .logo {
-    margin-bottom: 15px;
-    width: 70%;
+    margin-bottom: 25px;
+    width: 90%; /* Increased from 70% */
+    min-width: 250px;
   }
 
   .cluster {
-    gap: 10px;
+    gap: 15px;
   }
 }
