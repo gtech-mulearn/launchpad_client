@@ -443,22 +443,6 @@ function LeaderboardPage() {
                   Thank you for your interest in recruiting talent from
                   Launchpad, {hireFormData.companyName}!
                 </p>
-                <p className="thanks-details">
-                  We've received your request to connect with{" "}
-                  {selectedUser.full_name}. Our team will review your
-                  application and reach out to coordinate next steps.
-                </p>
-                <p className="thanks-employer">
-                  As an employer, you're making a valuable contribution to our
-                  community's growth. We prioritize employer requests and will
-                  process yours promptly.
-                </p>
-                <div className="thanks-footer">
-                  <p className="contact-info">
-                    For urgent inquiries, please contact our recruitment team
-                    directly.
-                  </p>
-                </div>
                 <button
                   className="close-thanks-button"
                   onClick={handleCloseThanksModal}
