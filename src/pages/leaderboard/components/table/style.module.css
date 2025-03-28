@@ -1,58 +1,210 @@
-.tableContainer {
-    overflow-x: auto;
-    overflow-y: auto;
-    max-width: 1240px;
-    max-height: 100%;
+.tableWrapper {
     width: 100%;
-    font-family: 'plus-jakarta-sans'
-  }
-  .leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+}
+
+.tableContainer {
+    max-width: 1240px;
+    width: 100%;
+    font-family: 'plus-jakarta-sans';
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    overflow: hidden;
+}
+
+.contactButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #f5ae77;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(245, 174, 119, 0.2);
+}
+
+.contactButton:hover {
+    background-color: #ee9a54;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(245, 174, 119, 0.3);
+}
+
+.contactButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(245, 174, 119, 0.2);
+}
+
+.disabledButton {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.buttonIcon {
+    flex-shrink: 0;
+}
+
+.noResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 200px;
+    text-align: center;
+}
+
+.noResults p {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.resetButton {
+    padding: 8px 16px;
+    background-color: #f5ae77;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+    background-color: #ee9a54;
+    transform: translateY(-1px);
+}
+
+.scrollArea {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 0;
+}
+
+.leaderboard {
     width: 100%;
     border-collapse: collapse;
-  }
+    min-width: 600px; /* Ensures minimum width on small screens */
+}
   
-  .header_row {
-    /* background-color: #F2F2F7; */
+.header_row {
     background-color: #f5ae77;
     color: white;
     font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .header_cell {
-    padding: 10px;
-    /* border: 1px solid #ccc; */
+    padding: 14px 10px;
     text-align: left;
     font-weight: bold;
     font-size: larger;
     color: black;
-    font-family: 'plus-jakarta-sans'
-
+    font-family: 'plus-jakarta-sans';
 }
+
 .data_row {
     background-color: #FFFFFF;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
+
 .data_row:hover{
-  background-color: #f5ae7737;
-  transition: all 0.3s;
+    background-color: #f5ae7737;
+    transition: all 0.3s;
 }
 
 .data_cell {
-    padding: 10px;
+    padding: 12px 10px;
     text-align: left;
     font-weight: bold;
-    font-family: 'plus-jakarta-sans'
-  }
+    font-family: 'plus-jakarta-sans';
+    white-space: nowrap; /* Prevents text wrapping */
+}
   
-  .profile_pic {
+.profile_pic {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
-  }
-  .center_div{
+}
+
+.center_div{
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+    .tableContainer {
+        border-radius: 6px;
+    }
+    
+    .scrollArea {
+        width: 100%;
+    }
+    
+    .header_cell, .data_cell {
+        padding: 8px 5px;
+        font-size: 0.9rem;
+    }
+    
+    .profile_pic {
+        width: 30px;
+        height: 30px;
+        margin-right: 6px;
+    }
+    
+    .noResults {
+        padding: 30px 15px;
+    }
+    
+    .noResults p {
+        font-size: 1rem;
+    }
+    
+    .contactButton {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header_cell {
+        font-size: 0.85rem;
+        padding: 6px 4px;
+    }
+    
+    .data_cell {
+        font-size: 0.8rem;
+        padding: 6px 4px;
+    }
+    
+    .profile_pic {
+        width: 25px;
+        height: 25px;
+        margin-right: 4px;
+    }
+    
+    .contactButton {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+}
