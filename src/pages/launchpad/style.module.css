@@ -1,0 +1,171 @@
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.header_row {
+  background-color: #f8f9fa;
+}
+
+.header_cell {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data_row {
+  transition: background-color 0.2s;
+}
+
+.data_row:hover {
+  background-color: #f8f9fa;
+}
+
+.data_cell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile_pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+/* New CSS styles to replace Tailwind */
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+}
+
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-weight: 800;
+  color: #EF7E28;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 24px;
+  text-transform: uppercase;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-wrap: wrap;
+}
+
+.searchContainer {
+  display: flex;
+  max-width: 448px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchInput {
+  flex-grow: 1;
+  padding: 8px 16px;
+  font-size: 16px;
+  min-width: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border: 1px solid #d1d5db;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  outline: none;
+  box-shadow: 0 0 0 1px #f59e0b;
+  border-color: transparent;
+  background-color: white;
+}
+
+.searchButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #f59e0b;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  outline: none;
+  box-shadow: 0 0 0 1px #f59e0b;
+  white-space: nowrap;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Media queries */
+@media (min-width: 1024px) {
+  .container {
+    padding: 80px;
+  }
+  
+  .title {
+    font-size: 5vw;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .title {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchInput {
+    font-size: 14px;
+  }
+  
+  .searchButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchContainer {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  
+  .searchInput {
+    font-size: 13px;
+  }
+  
+  .searchButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Khand:wght@300;400;500;600;700&family=Rubik+Moonrocks&display=swap');
+
+.profileCard {
+  background: #FDF8F4;
+  border: 2px solid #f5700e;
+  border-radius: 10px;
+  padding: 15px;
+  width: 400px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  align-items: start;
+  position: relative;
+  z-index: 10;
+  padding-top: 10px;
+}
+
+.badge {
+  width: 70px;
+  margin-top: 4px;
+}
+
+.profileInfo {
+  /* margin-top: 10px; */
+  flex: 1;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'plus-jakarta-sans';
+  line-height: 0.9;
+
+}
+
+.email {
+  margin: 0px 0;
+  font-size: 0.9rem;
+  font-weight: lighter;
+  font-family: 'plus-jakarta-sans'
+}
+
+.college, .district {
+  margin: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: 'plus-jakarta-sans'
+}
+
+.rank {
+  font-size: 8rem;
+  font-weight: bold;
+  color: #EF7E28;
+  opacity: 0.6;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: Inter, sans-serif;
+  z-index: -1;
+  text-align: start;
+  line-height: 1;
+}
+
+.profileFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.karma {
+  display: flex;
+  align-items: center;
+  background: #f5700e;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+
+.karmaIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.karmaValue {
+  font-size: 1.2rem;
+  font-family: 'plus-jakarta-sans';
+  font-weight: bold;
+}
+
+.logo {
+  width: 250px;
+}
+
+/* Flex container adjustments for smaller screens */
+@media (max-width: 768px) {
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .flex-wrap > div {
+    flex: 0 0 100%; /* Makes each card take up 100% of the width on small screens */
+  }
+  .flex-wrap > div:nth-child(3) {
+    order: 1; /* Moves the third card to the beginning of the second line */
+  }
+
+  .profileCard {
+    width: 100%;
+  }
+
+  .rank {
+    font-size: 5rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .email {
+    font-size: 0.8rem;
+  }
+
+  .college, .district {
+    font-size: 0.8rem;
+  }
+
+  .karmaIcon {
+    font-size: 1rem;
+  }
+
+  .karmaValue {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .profileCard {
+      width: 100%;
+      padding: 8px;
+      min-height: 200px;
+    }
+  
+    .badge {
+      width: 35px;
+    }
+  
+    .rank {
+      font-size: 6rem;
+    }
+  
+    .name {
+      font-size: 1rem
+    }
+  
+    .email {
+      font-size: 0.7rem;
+    }
+  
+    .college, .district {
+      font-size: 0.7rem;
+    }
+  
+    .karma {
+      padding: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+    }
+  
+    .karmaIcon {
+      font-size: 0.9rem
+    }
+  
+    .karmaValue {
+      font-size: 0.9rem;
+    }
+  
+    .logo {
+      width: 200px;
+    }
+  }
