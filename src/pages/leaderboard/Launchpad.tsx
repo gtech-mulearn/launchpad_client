@@ -26,7 +26,7 @@ interface topthreeProps {
   is_public: boolean;
 }
 
-function Launchpad() {
+function Leaderboard() {
   const [tableData, settableData] = useState([]);
   const [paginationData, setpaginationData] = useState<paginationProps | {}>(
     {}
@@ -108,4 +108,4 @@ function Launchpad() {
   );
 }
 
-export default Launchpad;
+export default Leaderboard;

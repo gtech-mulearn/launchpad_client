@@ -1,7 +1,22 @@
+import React from "react";
+// @ts-ignore
 import launchpad_logo from "../../assets/launchpad.png";
+// @ts-ignore
 import badge from "../../assets/paunchpad_badge.png";
 import style from "./style.module.css";
 import toast, { Toaster } from "react-hot-toast";
+
+interface CardProps {
+  img: string;
+  full_name: string;
+  email: string;
+  karma: number;
+  rank: number;
+  org: string;
+  district_name: string;
+  is_public: boolean;
+  muid: string;
+}
 
 function Card({
   img,

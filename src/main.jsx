@@ -3,11 +3,11 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Loading from "./components/Loading.jsx";
 import LoadingWrapper from "./components/LoadingWrapper.jsx";
-import Launchpad from "./pages/launchpad/Launchpad.tsx";
+import Launchpad from "./pages/leaderboard/Launchpad.tsx";
 
 // Lazy load the components
 const Home = lazy(() => import("./pages/Home/HomePage.jsx"));
-const LeaderboardPage = lazy(() => import("./pages/Leaderboard/LeaderboardPage.jsx"));
+const LeaderboardPage = lazy(() => import("./pages/leaderboard/Launchpad.tsx"));
 const Leader = lazy(() => import("./pages/Test_Temp/Leader.jsx"));
 
 const router = createBrowserRouter([
@@ -35,14 +35,7 @@ const router = createBrowserRouter([
       </Suspense>
     ),
   },
-  {
-    path: "/launchpad",
-    element: (
-      <Suspense fallback={<Loading />}>
-        <Launchpad/>
-      </Suspense>
-    ),
-  },
+
 ]);
 
 createRoot(document.getElementById("root")).render(
