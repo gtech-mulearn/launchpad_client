@@ -340,8 +340,7 @@ function LeaderboardPage() {
           <div className="modal-container">
             <div className="modal-header">
               <h2>
-                <span className="text-black">Hire</span>{" "}
-                {selectedUser.full_name}
+                <span className="hire-text">Hire</span> {selectedUser.full_name}
               </h2>
               <button className="modal-close" onClick={handleCloseModal}>
                 ×
@@ -389,7 +388,6 @@ function LeaderboardPage() {
                     name="message"
                     value={hireFormData.message}
                     onChange={handleInputChange}
-                    placeholder={`Tell us why you're interested in hiring ${selectedUser.full_name}`}
                     required
                   ></textarea>
                 </div>
