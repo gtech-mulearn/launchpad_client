@@ -149,38 +149,55 @@ function LeaderboardPage() {
   };
 
   // Function to render profile picture or fallback icon
-  const renderProfilePicture = (user) => {
-    if (user.profile_pic) {
-      return (
-        <img
-          src={user.profile_pic}
-          alt={`${user.full_name}'s profile`}
-          className="profile-picture"
-        />
-      );
-    } else {
-      // Person circle icon as SVG
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="profile-icon"
-        >
-          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
-          <path d="M12 15a5 5 0 0 1-5-5c0-2.76 2.24-5 5-5s5 2.24 5 5a5 5 0 0 1-5 5z"></path>
-          <path d="M18.13 17.83A9.36 9.36 0 0 1 12 20c-2.24 0-4.26-.84-5.85-2.19"></path>
-        </svg>
-      );
-    }
-  };
+  // const renderProfilePicture = (user) => {
+  //   if (user.profile_pic) {
+  //     return (
+  //       <img
+  //         src={user.profile_pic}
+  //         alt={`${user.full_name}'s profile`}
+  //         className="profile-picture"
+  //       />
+  //     );
+  //   } else {
+  //     // Person circle icon as SVG
+  //     return (
+  //       <svg
+  //         xmlns="http://www.w3.org/2000/svg"
+  //         viewBox="0 0 24 24"
+  //         fill="none"
+  //         stroke="currentColor"
+  //         strokeWidth="2"
+  //         strokeLinecap="round"
+  //         strokeLinejoin="round"
+  //         className="profile-icon"
+  //       >
+  //         <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
+  //         <path d="M12 15a5 5 0 0 1-5-5c0-2.76 2.24-5 5-5s5 2.24 5 5a5 5 0 0 1-5 5z"></path>
+  //         <path d="M18.13 17.83A9.36 9.36 0 0 1 12 20c-2.24 0-4.26-.84-5.85-2.19"></path>
+  //       </svg>
+  //     );
+  //   }
+  // };
 
   return (
     <div className="leaderboard">
+      <div className="breadcrumb-navigation">
+        <a href="/" className="breadcrumb-link">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="breadcrumb-icon"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Home</span>
+        </a>
+      </div>
       <div className="leaderboard-container">
         {loading ? (
           <Spinner />
@@ -283,7 +300,7 @@ function LeaderboardPage() {
                       >
                         <td>{(currentPage - 1) * 10 + index + 1}</td>
 
-                        <td>{user.full_name}</td>
+                        <td className="user_full_name">{user.full_name}</td>
                         <td>
                           {user.total_karma > 1000
                             ? `${(user.total_karma / 1000).toFixed(1)}K `
@@ -300,16 +317,18 @@ function LeaderboardPage() {
                           <div className="interest-groups">
                             {user.ig_data.map((ig) => (
                               <div key={ig.ig_id} className="interest-group">
-                                <span className="ig-name">{ig.ig_name}</span>
+                                {/* Shorten and format the interest group name for better display */}
+                                <span className="ig-name">
+                                  {ig.ig_name ===
+                                  "Internet Of Things (IOT) And Robotics"
+                                    ? "IoT & Robotics"
+                                    : ig.ig_name}
+                                </span>
                                 <span className="ig-karma">
                                   {ig.ig_karma > 1000
                                     ? `${(ig.ig_karma / 1000).toFixed(1)}K `
                                     : ig.ig_karma}
-                                  <span
-                                    className={
-                                      "font-sans font-bold text-xl pl-1 -translate-y-1 text-[#1B1A1E]"
-                                    }
-                                  >
+                                  <span className="font-sans font-bold text-lg pl-1 -translate-y-1 text-[#1B1A1E]">
                                     ϰ
                                   </span>
                                 </span>

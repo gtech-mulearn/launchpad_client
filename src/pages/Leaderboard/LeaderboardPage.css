@@ -92,18 +92,6 @@
   background-color: #fff8f3;
 }
 
-.leaderboard-table tr.top-1 td:first-child {
-  position: relative;
-  font-weight: 700;
-  font-size: 1.15rem;
-}
-
-.leaderboard-table tr.top-2 td:first-child,
-.leaderboard-table tr.top-3 td:first-child {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
 .interest-groups {
   display: flex;
   flex-direction: column;
@@ -681,4 +669,66 @@
 .hire-text {
   color: #333;
   font-size: x-large;
+}
+
+/* Add these styles to your LeaderboardPage.css file */
+
+.breadcrumb-navigation {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 10px;
+}
+
+.breadcrumb-link {
+  display: flex;
+  align-items: center;
+  color: #f5700e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.breadcrumb-link:hover {
+  color: #e06000;
+  background-color: rgba(245, 112, 14, 0.08);
+}
+
+.breadcrumb-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .breadcrumb-navigation {
+    margin-bottom: 15px;
+  }
+
+  .breadcrumb-link {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+
+  .breadcrumb-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumb-link {
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+  }
 }
